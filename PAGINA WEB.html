@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Documento sin título</title>
+<style type="text/css">
+<!--
+body {
+	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+	background-color: #42413C;
+	margin: 0;
+	padding: 0;
+	color: #000;
+}
+/* ~~ Selectores de elemento/etiqueta ~~ */
+ul, ol, dl { /* Debido a las diferencias existentes entre los navegadores, es recomendable no añadir relleno ni márgenes en las listas. Para lograr coherencia, puede especificar las cantidades deseadas aquí o en los elementos de lista (LI, DT, DD) que contienen. Recuerde que lo que haga aquí se aplicará en cascada en la lista .nav, a no ser que escriba un selector más específico. */
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* la eliminación del margen superior resuelve un problema que origina que los márgenes escapen del bloque contenedor. El margen inferior restante lo mantendrá separado de los elementos de que le sigan.  */
+	padding-right: 15px;
+	padding-left: 15px; /* la adición de relleno a los lados del elemento dentro de los bloques, en lugar de en los elementos del bloque propiamente dicho, elimina todas las matemáticas de modelo de cuadro. Un bloque anidado con relleno lateral también puede usarse como método alternativo. */
+}
+a img { /* este selector elimina el borde azul predeterminado que se muestra en algunos navegadores alrededor de una imagen cuando está rodeada por un vínculo */
+	border: none;
+}
+/* ~~ La aplicación de estilo a los vínculos del sitio debe permanecer en este orden (incluido el grupo de selectores que crea el efecto hover -paso por encima-). ~~ */
+a:link {
+	color: #42413C;
+	text-decoration: underline; /* a no ser que aplique estilos a los vínculos para que tengan un aspecto muy exclusivo, es recomendable proporcionar subrayados para facilitar una identificación visual rápida */
+}
+a:visited {
+	color: #6E6C64;
+	text-decoration: underline;
+}
+a:hover, a:active, a:focus { /* este grupo de selectores proporcionará a un usuario que navegue mediante el teclado la misma experiencia de hover (paso por encima) que experimenta un usuario que emplea un ratón. */
+	text-decoration: none;
+}
+/* ~~ Este contenedor de anchura fija rodea a todas las demás bloques ~~ */
+.container {
+	width: 960px;
+	background-color: #FFFFFF;
+	margin: 0 auto; /* el valor automático de los lados, unido a la anchura, centra el diseño  */
+}
+/* ~~ No se asigna una anchura al encabezado. Se extenderá por toda la anchura del diseño. ~~ */
+header {
+	background-color: #ADB96E;
+}
+/* ~~ Estas son las columnas para el diseño. ~~ 
+
+1) El relleno sólo se sitúa en la parte superior y/o inferior de los elementos del bloque. Los elementos situados dentro de estos bloques tienen relleno a los lados. Esto le ahorra las "matemáticas de modelo de cuadro". Recuerde que si añade relleno o borde lateral al bloque propiamente dicho, éste se añadirá a la anchura que defina para crear la anchura *total*. También puede optar por eliminar el relleno del elemento en el  bloque y colocar un segundo bloque dentro de éste sin anchura y el relleno necesario para el diseño deseado.
+
+2) No se asigna margen a las columnas, ya que todas ellas son flotantes. Si es preciso añadir un margen, evite colocarlo en el lado hacia el que se produce la flotación (por ejemplo: un margen derecho en un bloque configurado para flotar hacia la derecha). En muchas ocasiones, puede usarse relleno como alternativa. En el caso de bloques para los que deba incumplirse esta regla, deberá añadir una declaración "display:inline" a la regla del elemento del bloque para evitar un error que provoca que algunas versiones de Internet Explorer dupliquen el margen.
+
+3) Dado que las clases se pueden usar varias veces en un documento (y que también se pueden aplicar varias clases a un elemento), se ha asignado a las columnas nombres de clases en lugar de ID. Por ejemplo, dos bloques de barra lateral podrían apilarse si fuera necesario. Si lo prefiere, éstas pueden cambiarse a ID fácilmente, siempre y cuando las utilice una sola vez por documento.
+
+4) Si prefiere que la navegación esté a la izquierda en lugar de a la derecha, simplemente haga que estas columnas floten en dirección opuesta (todas a la izquierda en lugar de todas a la derecha) y éstas se representarán en orden inverso. No es necesario mover los bloques por el código fuente HTML.
+
+*/
+.sidebar1 {
+	float: right;
+	width: 180px;
+	background-color: #EADCAE;
+	padding-bottom: 10px;
+}
+.content {
+	padding: 10px 0;
+	width: 780px;
+	float: right;
+}
+
+/* ~~ Este selector agrupado da espacio a las listas del área de .content ~~ */
+.content ul, .content ol {
+	padding: 0 15px 15px 40px; /* este relleno reproduce en espejo el relleno derecho de la regla de encabezados y de párrafo incluida más arriba. El relleno se ha colocado en la parte inferior para que el espacio existente entre otros elementos de la lista y a la izquierda cree la sangría. Estos pueden ajustarse como se desee. */
+}
+
+/* ~~ Los estilos de lista de navegación (pueden eliminarse si opta por usar un menú desplegable predefinido como el de Spry) ~~ */
+ul.nav {
+	list-style: none; /* esto elimina el marcador de lista */
+	border-top: 1px solid #666; /* esto crea el borde superior de los vínculos (los demás se sitúan usando un borde inferior en el LI) */
+	margin-bottom: 15px; /* esto crea el espacio entre la navegación en el contenido situado debajo */
+}
+ul.nav li {
+	border-bottom: 1px solid #666; /* esto crea la separación de los botones  */
+}
+ul.nav a, ul.nav a:visited { /* al agrupar estos selectores, se asegurará de que los vínculos mantengan el aspecto de botón incluso después de haber sido visitados  */
+	padding: 5px 5px 5px 15px;
+	display: block; /* esto asigna propiedades de bloque al vínculo, lo que provoca que llene todo el LI que lo contiene. Esto provoca que toda el área reaccione a un clic de ratón. */
+	width: 160px;  /*esta anchura hace que se pueda hacer clic en todo el botón para IE6. Puede eliminarse si no es necesario proporcionar compatibilidad con IE6. Calcule la anchura adecuada restando el relleno de este vínculo de la anchura del contenedor de barra lateral. */
+	text-decoration: none;
+	background-color: #C6D580;
+}
+ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* esto cambia el color de fondo y del texto tanto para usuarios que naveguen con ratón como para los que lo hagan con teclado */
+	background-color: #ADB96E;
+	color: #FFF;
+}
+
+/* ~~ El pie de página ~~ */
+footer {
+	padding: 10px 0;
+	background-color: #CCC49F;
+	position: relative;/* esto da a IE6 el parámetro hasLayout para borrar correctamente */
+	clear: both; /* esta propiedad de borrado fuerza a .container a conocer dónde terminan las columnas y a contenerlas */
+}
+
+/*Compatibilidad con HTML 5: define nuevas etiquetas HTML 5 como display:block para que los navegadores sepan cómo procesar las etiquetas correctamente. */
+header, section, footer, aside, article, figure {
+	display: block;
+}
+-->
+</style><!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]--></head>
+
+<body>
+
+<div class="container">
+  <header>
+    <a href="#"><img src="CDF LOGO.jpg" alt="Insertar logotipo aquí" width="778" height="286" id="Insert_logo" style="background-color: #C6D580; display:block;" /></a>
+  </header>
+  <div class="sidebar1">
+    <ul class="nav">
+        <li><a href="https://www.google.com/maps/place/Cl%C3%ADnica+Dental+Familiar+Dra.+Rodr%C3%ADguez/@14.9541725,-88.3240269,17z/data=!3m1!4b1!4m6!3m5!1s0x8f64279cfd2fc8eb:0xa125cf6efa54f5f!8m2!3d14.9541725!4d-88.3240269!16s%2Fg%2F11sbq0m842?entry=ttu&g_ep=EgoyMDI1MDIyNi4xIKXMDSoASAFQAw%3D%3D">Ubicacion </a></li>
+        <li><a href="https://www.facebook.com/share/1BXmdFzRm4/?mibextid=qi2Omg">Facebook</a><a href="https://wa.me/message/LBSXPWAQHH63O1">WhatsApp</a> </li>
+    </ul>
+    <aside>
+      <p>Aqui tienes algunos vinculos que pueden ser utiles.      </p>
+      <p>En nuestras redes sociales podras encontras mas contenido a cerca de nuestros tratamientos contenido exclusivo solo para ti.</p>
+      <p>Contactate con nosotros y agenda tu cita hoy.</p>
+      <p>Recuerda seguirnos en nuestras redes sociales para no perderte de nada.</p>
+      <p>Clinica Denta Familiar </p>
+      <p>Salud y Bienestar al alcance de todos.</p>
+    </aside>
+  <!-- end .sidebar1 --></div>
+  <article class="content">
+    <h1>CLINICA DENTAL FAMILIAR </h1>
+    <section>
+      <h1>¿ Quienes somos ?</h1>
+      <p data-start="77" data-end="473">La Clínica Dental Familiar de la Dra. Meyby Leiva Rodríguez se ha destacado por ofrecer atención odontológica de calidad en un ambiente cálido y profesional, ideal para toda la familia. Con años de experiencia y un equipo altamente capacitado, la Dra. Leiva Rodríguez y su equipo están comprometidos con el bienestar de sus pacientes, brindando un enfoque personalizado y accesible para cada uno.</p>
+      <p data-start="475" data-end="838">La clínica cuenta con tecnología de última generación y un enfoque integral en la salud dental, lo que le permite ofrecer una amplia gama de servicios, desde tratamientos preventivos y estética dental hasta procedimientos más complejos como ortodoncia y cirugía dental. Todo ello con la más alta calidad y bajo los más estrictos estándares de higiene y seguridad.</p>
+      <p data-start="840" data-end="1278">En la Clínica Dental Familiar de la Dra. Meyby Leiva Rodríguez, la comodidad y satisfacción del paciente son una prioridad. El trato cercano y amable, junto con la atención detallada en cada consulta, hacen que cada visita sea una experiencia agradable. Ya sea que se trate de una consulta rutinaria o de un tratamiento especializado, los pacientes pueden estar seguros de recibir un servicio excepcional y un cuidado dental de confianza.</p>
+      <p data-start="1280" data-end="1470" data-is-last-node="" data-is-only-node="">Visita la Clínica Dental Familiar de la Dra. Meyby Leiva Rodríguez y descubre por qué tantas familias confían en su experiencia y dedicación para cuidar la salud bucal de todos sus integrantes .</p>
+      <h2>&nbsp;</h2>
+    </section>
+    <section>
+      <h1 data-start="0" data-end="328">MISION VISION Y VALORES </h1>
+      <p data-start="0" data-end="328"><strong data-start="0" data-end="10">Misión</strong><br data-start="10" data-end="13">
+        Brindar atención odontológica integral, personalizada y de calidad a toda la familia, utilizando tecnología avanzada y procedimientos de vanguardia para garantizar una salud bucal óptima. Nos comprometemos a ofrecer un ambiente seguro, cómodo y confiable, donde cada paciente reciba el mejor cuidado dental posible.</p>
+      <p data-start="330" data-end="680"><strong data-start="330" data-end="340">Visión</strong><br data-start="340" data-end="343">
+        Ser reconocidos como líderes en el cuidado odontológico familiar, destacándonos por la excelencia en nuestros tratamientos, la innovación en los servicios y el compromiso con la salud bucal de nuestros pacientes. Aspiramos a ser la primera opción para el cuidado dental de todas las generaciones, creando sonrisas saludables y duraderas.</p>
+      <p data-start="682" data-end="695"><strong data-start="682" data-end="693">Valores</strong></p>
+      <ul data-start="696" data-end="1414" data-is-only-node="" data-is-last-node="">
+        <li data-start="696" data-end="847"><strong data-start="698" data-end="712">Compromiso</strong>: Nos dedicamos a ofrecer un servicio de calidad y a cuidar la salud bucal de nuestros pacientes con profesionalismo y responsabilidad.</li>
+        <li data-start="848" data-end="983"><strong data-start="850" data-end="863">Confianza</strong>: Fomentamos relaciones basadas en la honestidad, la transparencia y el respeto, creando un ambiente de confianza mutua.</li>
+        <li data-start="984" data-end="1117"><strong data-start="986" data-end="1000">Innovación</strong>: Buscamos siempre incorporar las últimas tecnologías y técnicas odontológicas para ofrecer los mejores tratamientos.</li>
+        <li data-start="1118" data-end="1245"><strong data-start="1120" data-end="1131">Empatía</strong>: Escuchamos y comprendemos las necesidades de cada paciente, ofreciendo un trato amable, cercano y personalizado.</li>
+        <li data-start="1246" data-end="1414" data-is-last-node=""><strong data-start="1248" data-end="1269">Salud y Bienestar</strong>: Promovemos la prevención y el cuidado continuo de la salud dental como un aspecto fundamental para el bienestar integral de nuestros pacientes.</li>
+      </ul>
+      <h2></h2>
+      <h2>&nbsp;</h2>
+    </section>
+    <section>
+      <h1 data-start="0" data-end="160">NUESTROS SERVICOS PROFECIONALES </h1>
+      <p data-start="0" data-end="160">En la Clínica Dental Familiar de la Dra. Meyby Leiva Rodríguez, se ofrecen diversos tratamientos odontológicos para cubrir todas las necesidades de salud bucal:</p>
+      <ol data-start="162" data-end="962">
+        <li data-start="162" data-end="285">
+          <p data-start="165" data-end="285"><strong data-start="165" data-end="190">Blanqueamiento Dental</strong>: Tratamiento estético para mejorar el color de los dientes y lograr una sonrisa más brillante.</p>
+        </li>
+        <li data-start="287" data-end="414">
+          <p data-start="290" data-end="414"><strong data-start="290" data-end="304">Ortodoncia</strong>: Soluciones personalizadas con brackets o alineadores para corregir problemas de alineación dental y mordida.</p>
+        </li>
+        <li data-start="416" data-end="566">
+          <p data-start="419" data-end="566"><strong data-start="419" data-end="441">Implantes Dentales</strong>: Procedimientos para reemplazar dientes perdidos de forma permanente, restaurando la funcionalidad y estética de la sonrisa.</p>
+        </li>
+        <li data-start="568" data-end="684">
+          <p data-start="571" data-end="684"><strong data-start="571" data-end="592">Carillas Dentales</strong>: Finas láminas de porcelana que se colocan sobre los dientes para mejorar su forma y color.</p>
+        </li>
+        <li data-start="686" data-end="837">
+          <p data-start="689" data-end="837"><strong data-start="689" data-end="721">Limpieza y Profilaxis Dental</strong>: Servicios preventivos para mantener la salud bucal, eliminando placa y sarro que pueden causar problemas dentales.</p>
+        </li>
+        <li data-start="839" data-end="962">
+          <p data-start="842" data-end="962"><strong data-start="842" data-end="883">Endodoncia (Tratamiento de Conductos)</strong>: Procedimiento para salvar dientes dañados por infecciones o lesiones severas.</p>
+          <p data-start="842" data-end="962">&nbsp;</p>
+        </li>
+        <img src="ORTODONCIA.jpg" width="728" height="313">
+      </ol>
+      <ol data-start="162" data-end="962">
+        <img src="ARTE 1.jpg" width="728" height="550">
+      </ol>
+      <h2>&nbsp;</h2>
+    </section>
+    <section>
+      <h2>CONTACTANOS - AGENDA TU CITA HOY </h2>
+      <p><img src="ARTE DE CITA.jpg" width="551" height="771"></p>
+    </section>
+  <!-- end .content --></article>
+  <footer>
+    <p>Creado por -Mario Eduardo Doblado Quintanilla </p>
+    <address>
+    </address>
+  </footer>
+  <!-- end .container --></div>
+</body>
+</html>
